@@ -1,73 +1,87 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+## APIs
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+`/api` to get all the information of APIs
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+**SMS**
 
-## Description
+- `/sms/now` : Send SMS to all of the input numbers
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+  Method : _POST_
 
-## Installation
+  Body:
+  | Field | Type | Description |
+  | ------------- | ------------- |-----|
+  |to|Array of strings|The recievers' phone number|
+  |message|string| The content of the SMS|
 
-```bash
-$ npm install
-```
+  Example:
 
-## Running the app
+  Request Body
 
-```bash
-# development
-$ npm run start
+  ```
+  {
+  "to": [
+    "1234567898"
+  ],
+  "message": "Hello World"
+  }
+  ```
 
-# watch mode
-$ npm run start:dev
+  Successful Response
 
-# production mode
-$ npm run start:prod
-```
+  ```
+  {
+   "success": true,
+   "result": {
+     "success": true,
+     "code": 200,
+     "message": "OK",
+     "data": {
+       "credit_usage": 1,
+       "remaining_credit": 3815
+       }
+     }
+   }
+  ```
 
-## Test
+- `/sms/scheduled` : Send scheduled SMS to all of the input numbers
 
-```bash
-# unit tests
-$ npm run test
+  Method : _POST_
 
-# e2e tests
-$ npm run test:e2e
+  Body:
+  | Field | Type | Description |
+  | ------------- | ------------- |-----|
+  |to|Array of strings|The recievers' phone number|
+  |message|string| The content of the SMS|
+  |scheduled_time|string| The scheduled time, using the format: yyyy-mm-dd hh:mm:ss|
 
-# test coverage
-$ npm run test:cov
-```
+  Example:
 
-## Support
+  Request Body
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+  ```
+  {
+    "to": [
+      "123456789"
+    ],
+    "message": "Hello, World",
+    "scheduled_time": "2023-06-12 11:24:00"
+  }
+  ```
 
-## Stay in touch
+  Successful Response
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+  ```
+   {
+    "success": true,
+    "result": {
+      "success": true,
+      "code": 200,
+      "message": "OK",
+      "data": {
+        "credit_usage": 1,
+        "remaining_credit": 3815
+        }
+      }
+    }
+  ```
