@@ -85,3 +85,11 @@
       }
     }
   ```
+  
+  ## .env
+  To use the API, create a new file, ".env". Inside the file, add your own token key and name.
+  For example: 
+  ```
+  THSMS_TOKEN_KEY = "INSERTYOURTOKENHERE"
+  THSMS_SENDER_NAME = "INSERTYOURNAMEHERE"
+  ```
